@@ -20,6 +20,9 @@
           <el-form-item>
             <el-button type="primary" icon="search" @click="submitForm">搜索</el-button>
           </el-form-item>
+          <el-form-item>
+            <el-button type="primary" icon="search" @click="exportExcel">导出</el-button>
+          </el-form-item>
         </el-form>
         <el-row style="display:none;font-size: 14px;color: rgb(25, 23, 23);background: rgb(123, 191, 241);padding: 10px;border-radius: 2px;">
           <el-col :span="4"><div class="grid-content bg-purple">总计：{{reportList.total}}</div></el-col>
@@ -45,6 +48,11 @@
                   label="订单号"
                   sortable>
                 </el-table-column>
+                <el-table-column
+			      prop="username"
+			      label="联系人"
+			      sortable>
+			    </el-table-column>
                 <el-table-column
                   prop="phone"
                   label="手机号"
@@ -89,6 +97,11 @@
                   width="180">
                 </el-table-column>
                 <el-table-column
+			      prop="username"
+			      label="联系人"
+			      sortable>
+			    </el-table-column>
+                <el-table-column
                   prop="phone"
                   label="手机号"
                   sortable
@@ -109,7 +122,7 @@
                   sortable
                   label="订单状态">
                   <template scope="scope">
-                    <span v-if="scope.row.status === '2'">已完成</span>
+                    <span v-if="scope.row.status === 2">已完成</span>
                     <el-button @click="takeGoods(scope.row)" type="primary" size="small" v-if="scope.row.status === 1">点击提货</el-button>
                     <!-- <el-button @click="takeGoods(scope.row)" type="text" size="small" v-text="scope.row.status === '已发货' ? '提货' : ''"></el-button> -->
                   </template>
@@ -134,6 +147,11 @@
                   width="180">
                 </el-table-column>
                 <el-table-column
+			      prop="username"
+			      label="联系人"
+			      sortable>
+			    </el-table-column>
+                <el-table-column
                   prop="phone"
                   label="手机号"
                   sortable
@@ -154,7 +172,11 @@
                   prop="status"
                   sortable
                   label="订单状态">
-                  
+                  <template scope="scope">
+                    <span v-if="scope.row.status === 2">已完成</span>
+                    <el-button @click="takeGoods(scope.row)" type="primary" size="small" v-if="scope.row.status === 1">点击提货</el-button>
+                    <!-- <el-button @click="takeGoods(scope.row)" type="text" size="small" v-text="scope.row.status === '已发货' ? '提货' : ''"></el-button> -->
+                  </template>
                 </el-table-column>
               </el-table>
         </el-tab-pane>
@@ -193,7 +215,7 @@
     import NProgress from 'nprogress'
     import { getOrderLists, getScoreOrderList, getReport, takeScoreDelivery } from 'api/api'
     import { dateFormat } from 'common/js/dateFormat.js'
-
+    import querystring from 'querystring';
   export default {
     data() {
             return {
@@ -263,6 +285,18 @@
             //this.getReportEnv()
         },
         methods: {
+            //导出
+            exportExcel(){
+                let exportUrl=location.protocol+"//"+location.hostname+':'+location.port+'/api/lines/excel?';
+                let body={}
+                body.s_time=this.stime;
+                body.e_time=this.etime;
+                body.tel=this.editForm.tel;
+                body.order_id=this.editForm.order_id;
+                body.status=this.activeName2==='one'?'':this.activeName2==='first'?'1':'2';
+                let params=querystring.stringify(body)
+                open(exportUrl+params,'_blank')
+            },
             cancel() {
                 this.dialogFormVisible = false
                 this.form.delivery_code = ''

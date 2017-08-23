@@ -23,7 +23,7 @@
 	      sortable>
 	    </el-table-column>
 	    <el-table-column
-	      prop="user_name"
+	      prop="real_name"
 	      label="姓名"
 	      sortable>
 	    </el-table-column>

@@ -115,6 +115,11 @@ export default new Router({
           component: resolve => require(['components/productManage/productManage'], resolve)
         },
         {
+          name:'积分产品管理',
+          path:'/productScoreManage',
+          component:resolve=>require(['components/productScoreManage/productScoreManage'],resolve)
+        },
+        {
           name: '绑定会员',
           path: '/bindUser',
           component: resolve => require(['components/bind-user/bind-user'], resolve)

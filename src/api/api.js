@@ -24,6 +24,24 @@ export const upqueue = params => { return axios.post(`${base}api/queue/upqueue`,
 // 密码更改
 export const passwordUpdate = params => { return axios.post(`${base}api/shop/passwordUpdate`, params).then(res => res.data) }
 
+// 积分商品列表获取
+export const getScoreGoodslist = params => { return axios.get(`${base}api/pgoods/lists`, params).then(res => res.data) }
+
+// 积分商品上下架
+export const goodScoreOnOff = params => { return axios.post(`${base}api/pgoods/onoff`, params).then(res => res.data) }
+
+// 积分商品编辑
+export const submitScoreGood = params => { return axios.post(`${base}api/pgoods/edit`, params).then(res => res.data) }
+
+// 积分商品删除
+export const deleteScoreWare = params => { return axios.post(`${base}api/pgoods/del`, params).then(res => res.data) }
+
+// 积分商品添加
+export const addScoreWare = params => { return axios.post(`${base}api/pgoods/adds`, params).then(res => res.data) }
+
+// 积分商品排序
+export const waresScoreChsort = params => { return axios.post(`${base}api/pgoods/chsort`, params).then(res => res.data) }
+
 // 商品列表获取
 export const getGoodslist = params => { return axios.get(`${base}api/wares/wareslist`, params).then(res => res.data) }
 

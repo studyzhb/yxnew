@@ -73,6 +73,10 @@
 						icon: 'el-icon-menu',
 						child: [
 							{
+								title: '积分商品管理',
+								path: '/productScoreManage'
+							},
+							{
 								title: '订单管理',
 								path: '/scoreOrderManage'
 							}
